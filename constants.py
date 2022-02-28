@@ -1,15 +1,15 @@
 import pygame
 
-BRUTEIMAGE = pygame.image.load("/Users/mattfichter/GOM_V2.0/assets/brute.png")
-CANNONIMAGE = pygame.image.load("/Users/mattfichter/GOM_V2.0/assets/cannon.png")
-ARCHERIMAGE = pygame.image.load("/Users/mattfichter/GOM_V2.0/assets/archer.png")
-BOXERIMAGE = pygame.image.load("/Users/mattfichter/GOM_V2.0/assets/boxer.png")
-SUPPORTIMAGE = pygame.image.load("/Users/mattfichter/GOM_V2.0/assets/support.png")
-DIAGONALIMAGE = pygame.image.load("/Users/mattfichter/GOM_V2.0/assets/diagonal.png")
-MIMICIMAGE = pygame.image.load("/Users/mattfichter/GOM_V2.0/assets/mimic.png")
-NINJAIMAGE = pygame.image.load("/Users/mattfichter/GOM_V2.0/assets/ninja.png")
-TRANSPORTERIMAGE = pygame.image.load("/Users/mattfichter/GOM_V2.0/assets/transporter.png")
-COMMONERIMAGE = pygame.image.load("/Users/mattfichter/GOM_V2.0/assets/commoner.png")
+BRUTEIMAGE = pygame.image.load(r"C:\Users\mattf\OneDrive\Desktop\Fichter Gam 2.0\GOM-CODE\assets\brute.png")
+CANNONIMAGE = pygame.image.load(r"C:\Users\mattf\OneDrive\Desktop\Fichter Gam 2.0\GOM-CODE\assets\cannon.png")
+ARCHERIMAGE = pygame.image.load(r"C:\Users\mattf\OneDrive\Desktop\Fichter Gam 2.0\GOM-CODE\assets\archer.png")
+BOXERIMAGE = pygame.image.load(r"C:\Users\mattf\OneDrive\Desktop\Fichter Gam 2.0\GOM-CODE\assets\boxer.png")
+SUPPORTIMAGE = pygame.image.load(r"C:\Users\mattf\OneDrive\Desktop\Fichter Gam 2.0\GOM-CODE\assets\support.png")
+DIAGONALIMAGE = pygame.image.load(r"C:\Users\mattf\OneDrive\Desktop\Fichter Gam 2.0\GOM-CODE\assets\diagonal.png")
+MIMICIMAGE = pygame.image.load(r"C:\Users\mattf\OneDrive\Desktop\Fichter Gam 2.0\GOM-CODE\assets\mimic.png")
+NINJAIMAGE = pygame.image.load(r"C:\Users\mattf\OneDrive\Desktop\Fichter Gam 2.0\GOM-CODE\assets\ninja.png")
+TRANSPORTERIMAGE = pygame.image.load(r"C:\Users\mattf\OneDrive\Desktop\Fichter Gam 2.0\GOM-CODE\assets\transporter.png")
+COMMONERIMAGE = pygame.image.load(r"C:\Users\mattf\OneDrive\Desktop\Fichter Gam 2.0\GOM-CODE\assets\commoner.png")
 
 IMAGELIST = [BRUTEIMAGE, CANNONIMAGE, ARCHERIMAGE, BOXERIMAGE, SUPPORTIMAGE, DIAGONALIMAGE, MIMICIMAGE, NINJAIMAGE, TRANSPORTERIMAGE, COMMONERIMAGE]
 

@@ -1,3 +1,5 @@
+from tkinter import Button
+import click
 import pygame
 from constants import *
 from board import *
@@ -17,20 +19,25 @@ dirty_rect_list = []
 characters_on_board = pygame.sprite.Group()
 pygame.init()
 dragging = False
-
-class Sprite_Mouse_Location(pygame.sprite.Sprite):
-    def __init__(self,x,y):
-        super().__init__()
-        self.rect = pygame.Rect(x,y,1,1)
+ready = []
 
 def select_character():
-    global is_selected, clickX, clickY
+    global is_selected, clickX, clickY, characters_on_board
     if is_selected == False:
         for character in selection_list:
             if character.rect.collidepoint(clickX, clickY):
-                is_selected = True
                 selected_character.clear()
                 selected_character.append(character)
+                clickX, clickY = 0, 0
+                is_selected = True
+        for character in characters_on_board:
+            if character.rect.collidepoint(clickX, clickY):
+                selected_character.clear()
+                selected_character.append(character)
+                clickX, clickY = 0, 0
+                all_characters.append(character)
+                is_selected = True
+                pygame.sprite.Group.remove(character)           
 
 def drag_character():
     global clickX, clickY, dragging, is_selected, selected_character
@@ -47,7 +54,7 @@ def drag_character():
         dragging == True
 
         if trash_bin().collidepoint(clickX, clickY):
-            selected_character = []
+            remove_placed_character_from_board()
             is_selected = False
             dragging = False
             SCREEN.fill(BLACK)
@@ -100,6 +107,53 @@ def remove_placed_character_from_start():
             if characters.identity == character.identity:
                 all_characters.remove(character)
 
+def remove_placed_character_from_board():
+    global selected_character
+    for character in all_characters:
+        for characters in selected_character:
+            for x in characters_on_board:
+                if characters.identity != character.identity and characters.identity == x.identity:
+                    characters_on_board.remove(characters)
+                    all_characters.insert(characters.index, characters)
+                    selected_character = []
+
+def remove_all_character_from_board():
+    for character in all_characters:
+        for characters in characters_on_board:
+            if characters.identity != character.identity:
+                characters_on_board.remove(characters)
+                all_characters.insert(characters.index, characters)
+                selected_character = []
+
+def sum_levels():
+    levels = 0
+    for character in characters_on_board:
+        levels += character.level
+    return levels
+
+def ready_button():
+    global ready, clickX, clickY
+    if sum_levels() == 10:
+        ready_rect = pygame.Rect(WIDTH/1.2, HEIGHT/3, SQUARE_SIZE, SQUARE_SIZE)
+        pygame.draw.rect(SCREEN, GREY, ready_rect)
+        ready.append(ready_rect)
+        if ready[0].collidepoint(clickX, clickY):
+            draw_board()
+            draw_character_slots()
+            remove_all_character_from_board()
+            place_characters_in_slots()
+    
+            
+
+def new_phase():
+    global ready, clickX, clickY
+    if sum_levels() == 10 and ready[0].collidepoint(clickX, clickY):
+        SCREEN.fill(BLACK)
+        draw_board()
+        draw_character_slots()
+        remove_all_character_from_board()
+        place_characters_in_slots()
+
             
 
 
@@ -117,6 +171,7 @@ def main():
     while run:
         clock.tick(FPS)
         drag_character()
+        ready_button()
         pygame.sprite.Group.draw(characters_on_board, SCREEN)
      
 
@@ -129,7 +184,8 @@ def main():
                 global clickX, clickY
                 clickX, clickY = event.pos
                 select_character()
-                
+                print(characters_on_board)
+                print(sum_levels())
                   
             if event.type == pygame.MOUSEMOTION:
                 motionX, motionY = event.pos
